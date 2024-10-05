@@ -11,7 +11,31 @@ from matplotlib.ticker import MaxNLocator
 df = pd.read_csv("nvidia_stock_data.csv")
 print(f"The df structure looks like... \n {df}")
 
-dates = df['Date']
+# Break out Columns
+dates      = df['Date']
+opens      = df['Open']
+highs      = df['High']
+lows       = df['Low']
+closes     = df['Close']
+adj_closes = df['Adj Close']
+volume     = df['Volume']
+
+
+
+# Analysis on Daily Moves
+day_results = []
+for i,j in zip(opens, closes):
+    if j > i:
+        day_results.append('Higher') # Ended Higher
+    else:
+        day_results.append('Lower') # Ended Lower
+# Plot Daily Moves
+plt.hist(day_results, bins=2, edgecolor='black')  
+plt.title('Higher or Lower for Day')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
 
 
 # Generate Plot
