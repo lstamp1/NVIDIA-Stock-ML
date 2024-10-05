@@ -1,18 +1,21 @@
 # Main source file to perform ML on Nvidia Stock Price Dataset
+# https://www.kaggle.com/datasets/syedfaizanalii/nividia-stock-dataset-2023-2024
 
+# Import Libs
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
+# Generate the DataFrame from CSV Data
 df = pd.read_csv("nvidia_stock_data.csv")
-
-
-
 print(f"The df structure looks like... \n {df}")
 
-df.plot.scatter(x = 'Date', y = 'Close')
+dates = df['Date']
 
+
+# Generate Plot
+df.plot.scatter(x = 'Date', y = 'Close')
 plt.xlabel('Date')  
 plt.ylabel('Price ($)')  
 plt.title('NVDA Price Close') 
