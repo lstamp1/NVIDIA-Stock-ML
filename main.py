@@ -11,7 +11,19 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import yfinance as yf
+from datetime import datetime, timedelta
 from matplotlib.ticker import MaxNLocator
+
+# Generate the DataFrame from Yahoo Finance Data
+data_timeframe = 365
+today = datetime.today().strftime('%Y-%m-%d')
+one_year_ago = (datetime.today() - timedelta(days=data_timeframe)).strftime('%Y-%m-%d')
+symbol = "NVDA"
+yf_nvda_data = yf.download(symbol, start=today, end=one_year_ago)
+
+
+
 
 
 # Generate the DataFrame from CSV Data
@@ -34,7 +46,7 @@ volume     = df['Volume']
 
 ########################### COLUMN GEN ##################################
 
-# Analysis on Daily Moves
+# Daily Price Change
 day_results = []
 for i,j in zip(opens, closes):
     if j > i:
@@ -83,3 +95,15 @@ plt.grid()
 plt.show()
 #plt.plot()
 
+
+
+
+
+
+
+
+
+
+
+
+# My BreakPoint
