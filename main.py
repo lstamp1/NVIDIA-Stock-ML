@@ -13,6 +13,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
+
 # Generate the DataFrame from CSV Data
 df = pd.read_csv("nvidia_stock_data.csv")
 print(f"The df structure looks like... \n {df}")
@@ -51,10 +52,24 @@ df_gen["Daily Moves ($)"] = daily_moves_value
 # Create column for daily moves (%)
 daily_moves_percent = []
 for i,j in zip(opens, closes):
-    daily_moves_percent.append((j-i)/i)
-df_gen["Daily Moves (%)"] = daily_moves_percent
+    daily_moves_percent.append(((j-i)/i)*100)
+df_gen["Daily Moves (%)"] = daily_moves_percent 
+
+# Intraday Value Change (% Change from yesterday to today)
+df_gen['Intraday Change (%)'] = df_gen['Close'].diff()
+
+# Volitility
+df_gen['Daily Volatility (30-day)'] = df_gen['Daily Moves (%)'].rolling(window=30).std() * np.sqrt(252)
 
 
+
+
+
+
+
+
+
+print(f"New dataset = \n {df_gen}")
 
 ########################### ANALYSIS ##################################
 
@@ -67,4 +82,4 @@ plt.gca().xaxis.set_major_locator(MaxNLocator(5))
 plt.grid()
 plt.show()
 #plt.plot()
-print(f"New dataset = \n {df_gen}")
+
