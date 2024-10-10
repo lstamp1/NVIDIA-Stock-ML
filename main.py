@@ -16,12 +16,20 @@ from datetime import datetime, timedelta
 from matplotlib.ticker import MaxNLocator
 
 # Generate the DataFrame from Yahoo Finance Data
-data_timeframe = 365
-today = datetime.today().strftime('%Y-%m-%d')
-one_year_ago = (datetime.today() - timedelta(days=data_timeframe)).strftime('%Y-%m-%d')
-symbol = "NVDA"
-yf_nvda_data = yf.download(symbol, start=today, end=one_year_ago)
+#data_timeframe = 365
+#today = datetime.today().strftime('%Y-%m-%d')
+#one_year_ago = (datetime.today() - timedelta(days=data_timeframe)).strftime('%Y-%m-%d')
+#symbol = "nvda"
+#yf_nvda_data = yf.download(symbol, start=today, end=one_year_ago)
 
+#print(f"the data looks like \n {yf_nvda_data}")
+
+
+#msft = yf.Ticker("MSFT")
+
+
+#msft.info
+#print(f"the data looks like \n {msft.info}")
 
 
 
@@ -73,7 +81,11 @@ df_gen['Intraday Change (%)'] = df_gen['Close'].diff()
 # Volitility
 df_gen['Daily Volatility (30-day)'] = df_gen['Daily Moves (%)'].rolling(window=30).std() * np.sqrt(252)
 
-
+# High Low Daily Difference
+daily_difference_value = []
+for c,b in zip(highs, lows):
+    daily_difference_value.append(c-b)
+df_gen["High Low Daily Difference"] = daily_difference_value
 
 
 
