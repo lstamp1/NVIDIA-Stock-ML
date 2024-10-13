@@ -8,7 +8,7 @@
 
 
 ########################### SETUP #####################################
-# Import Libs
+# Import Libs   
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -87,6 +87,12 @@ daily_difference_value = []
 for c,b in zip(highs, lows):
     daily_difference_value.append(c-b)
 df_gen["High Low Daily Difference"] = daily_difference_value
+
+# Closes Adj_closes Daily Difference
+daily_close_diff_value = []
+for n,m in zip(closes, adj_closes):
+    daily_close_diff_value.append(m-n)
+df_gen["closes adj_closes daily difference"] = daily_close_diff_value
 
 
 
